@@ -42,14 +42,21 @@
       border-radius:14px;padding:14px 18px;font-weight:700;background:var(--brand);color:#fff;
       border:1px solid #1f4fbf;box-shadow:var(--shadow)}
     .btn:hover{background:var(--brand2)}
-    .row{display:grid;grid-template-columns:1fr;gap:12px}
-    @media (min-width:620px){.row{grid-template-columns:1fr 1fr}}
-    .chip{display:inline-flex;gap:.5rem;align-items:center;background:var(--chip);
-      color:var(--chip-t);border-radius:999px;padding:6px 10px;font-weight:600}
+
+    /* Модалка */
+    .modal{position:fixed;inset:0;background:rgba(2,6,23,.55);display:none;align-items:center;justify-content:center;padding:16px}
+    .modal.show{display:flex}
+    .modal-card{max-width:580px;width:100%;background:var(--card);border:1px solid var(--border);
+      border-radius:16px;box-shadow:var(--shadow);padding:18px}
+    .modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+    .modal-title{font-size:18px;font-weight:800}
+    .xbtn{appearance:none;border:1px solid var(--border);background:transparent;color:var(--sub);
+      border-radius:10px;padding:6px 10px;cursor:pointer}
+    .list{display:grid;gap:10px;margin:8px 0}
+    .item{display:flex;justify-content:space-between;align-items:center;background:var(--chip);
+      color:var(--chip-t);border-radius:12px;padding:10px 12px}
+    .item a{color:var(--brand);text-decoration:none;font-weight:700}
     .foot{color:var(--muted);text-align:center;margin:26px 0 10px}
-    .kbd{font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas;
-      background:#0b12200d;color:var(--sub);border:1px solid var(--border);
-      padding:.1rem .35rem;border-radius:6px}
   </style>
 </head>
 <body>
@@ -71,77 +78,42 @@
       </div>
     </header>
 
-    <!-- 1. Поиск жилья -->
+    <!-- Поиск жилья -->
     <section class="section">
       <h2>🏠 Поиск жилья</h2>
       <p>Перейдите в нашего бота, чтобы найти квартиру, дом или апартаменты.</p>
       <a class="btn" id="btnSearch">🔎 Поиск жилья</a>
     </section>
 
-    <!-- 2. Обмен денег -->
+    <!-- Обмен денег (одна кнопка + модалка со списком) -->
     <section class="section">
       <h2>💱 Обмен денег</h2>
-      <p>Актуальные курсы и быстрый обмен. Надёжные точки и проверенные партнёры.</p>
-      <div class="row">
-        <a class="btn" id="btnExchange">💱 Перейти к обмену</a>
-        <a class="btn" id="btnExchangeAlt">🏦 Адреса/чат обмена</a>
-      </div>
+      <p>Актуальные курсы и быстрый обмен. Выберите удобный обменник.</p>
+      <button class="btn" id="btnExchangeOpen" type="button">💱 Перейти к обмену</button>
     </section>
 
-    <!-- 3. Трансфер -->
+    <!-- Трансфер (одна кнопка) -->
     <section class="section">
       <h2>🚕 Трансфер</h2>
       <p>Закажите трансфер из аэропорта или между городами. Фиксированная цена и встреча с табличкой.</p>
-      <div class="row">
-        <a class="btn" id="btnTransfer">🚕 Заказать трансфер</a>
-        <a class="btn" id="btnTransferInfo">ℹ️ Условия и тарифы</a>
-      </div>
+      <a class="btn" id="btnTransfer">🚕 Заказать трансфер</a>
     </section>
 
-    <!-- 4. Афиша -->
+    <!-- Афиша -->
     <section class="section">
       <h2>🎟 Афиша</h2>
-      <p>Зависли? Здесь мероприятия, вечеринки, полезные собрания и активити.</p>
+      <p>Мероприятия, встречи и активности.</p>
       <a class="btn" id="btnAfisha">🎟 Открыть афишу</a>
     </section>
 
-    <!-- 5. Чаты -->
-    <section class="section">
-      <h2>💬 Чаты</h2>
-      <p>Найдите жильё с помощью сообщества, задайте вопрос или просто пообщайтесь.</p>
-      <div class="row">
-        <a class="btn" id="btnChatSearch">🔍 Чат «Ищу жильё»</a>
-        <a class="btn" id="btnChatGeneral">👥 Общий чат</a>
-      </div>
-    </section>
-
-    <!-- 6. Услуги -->
-    <section class="section">
-      <h2>🧰 Услуги</h2>
-      <p>Решим бытовые вопросы: клининг, ремонт, интернет, помощь с документами и другое.</p>
-      <div class="row">
-        <a class="btn" id="btnServiceHouse">🏠 Бытовые услуги</a>
-        <a class="btn" id="btnSupport">🛟 Поддержка в Telegram</a>
-      </div>
-    </section>
-
-    <!-- 7. Добавить жильё (агенты/владельцы) -->
+    <!-- Добавить жильё -->
     <section class="section">
       <h2>📝 Добавить жильё</h2>
       <p>Публикация объектов, управление объявлениями и быстрый контакт.</p>
       <a class="btn" id="btnAgents">⚡ Добавить жильё</a>
     </section>
 
-    <!-- 8. Коротко о главном -->
-    <section class="section">
-      <h2>❓ Коротко о главном</h2>
-      <p class="chip">✅ Быстрый старт</p>
-      <p>Поиск — через кнопку <span class="kbd">«Поиск жилья»</span>. Размещение — <span class="kbd">«Добавить жильё»</span>.</p>
-      <p class="chip">🔒 Безопасность</p>
-      <p>Все переходы идут в Telegram, без лишних форм и логинов на сайте.</p>
-    </section>
-
-    <!-- 9. Связаться -->
+    <!-- Связаться -->
     <section class="section">
       <h2>📬 Связаться с нами</h2>
       <p>Если что-то не работает или есть предложение — напишите нам в Telegram.</p>
@@ -151,51 +123,70 @@
     <footer class="foot">© Polar Property Asia</footer>
   </div>
 
+  <!-- Модальное окно обменников -->
+  <div class="modal" id="exchangeModal" aria-hidden="true" role="dialog">
+    <div class="modal-card">
+      <div class="modal-head">
+        <div class="modal-title">💱 Выберите обменник</div>
+        <button class="xbtn" id="closeModal" type="button">Закрыть</button>
+      </div>
+      <div class="list" id="exchangeList"><!-- сюда рендерятся пункты --></div>
+    </div>
+  </div>
+
   <script>
-    // 🔗 ССЫЛКИ ТУТ: поставь свои URL (t.me/...), две первые уже заданы рабочими ботами.
+    // 🔗 ССЫЛКИ ТУТ
     const TG = {
       SEARCH_BOT:  "https://t.me/RentalPattaya_bot",
       AGENTS_BOT:  "https://t.me/AGENTS_Pattayarent_bot",
 
-      EXCHANGE:     "https://t.me/your_exchange_channel_or_bot",
-      EXCHANGE_ALT: "https://t.me/your_exchange_chat_or_map",
-
-      TRANSFER:      "https://t.me/your_transfer_bot",
-      TRANSFER_INFO: "https://t.me/your_transfer_info",
-
-      AFISHA:       "https://t.me/your_afisha_channel",
-
-      CHAT_SEARCH:  "https://t.me/your_search_chat",
-      CHAT_GENERAL: "https://t.me/your_general_chat",
-
-      SVC_HOUSE:    "https://t.me/your_household_service",
-      SVC_SUPPORT:  "https://t.me/your_support",
-
-      CONTACT:      "https://t.me/your_contact"
+      // Трансфер/Афиша/Контакты — временные заглушки, подставь свои когда будут готовы
+      TRANSFER:      "https://t.me/your_transfer_bot_or_link",
+      AFISHA:        "https://t.me/your_afisha_channel",
+      CONTACT:       "https://t.me/your_contact"
     };
 
-    // навешиваем ссылки на кнопки
+    // список обменников для модалки (добавляй/удаляй)
+    const EXCHANGERS = [
+      { name: "💱 BestChange TH", url: "https://t.me/your_exchanger_1" },
+      { name: "🏦 Cash&Card Pattaya", url: "https://t.me/your_exchanger_2" },
+      { name: "💶 Phuket Exchange", url: "https://t.me/your_exchanger_3" }
+    ];
+
+    // навешиваем ссылки на основные кнопки
     const byId = (id) => document.getElementById(id);
-    byId("btnSearch").href       = TG.SEARCH_BOT;
-    byId("btnAgents").href       = TG.AGENTS_BOT;
+    byId("btnSearch").href  = TG.SEARCH_BOT;
+    byId("btnAgents").href  = TG.AGENTS_BOT;
+    byId("btnTransfer").href= TG.TRANSFER;
+    byId("btnAfisha").href  = TG.AFISHA;
+    byId("btnContact").href = TG.CONTACT;
 
-    byId("btnExchange").href     = TG.EXCHANGE;
-    byId("btnExchangeAlt").href  = TG.EXCHANGE_ALT;
+    // модалка «Обмен денег»
+    const modal = byId("exchangeModal");
+    const openBtn = byId("btnExchangeOpen");
+    const closeBtn = byId("closeModal");
+    const list = byId("exchangeList");
 
-    byId("btnTransfer").href     = TG.TRANSFER;
-    byId("btnTransferInfo").href = TG.TRANSFER_INFO;
+    // рендерим список обменников
+    function renderExchanges(){
+      list.innerHTML = "";
+      EXCHANGERS.forEach(x=>{
+        const row = document.createElement("div");
+        row.className = "item";
+        row.innerHTML = `<span>${x.name}</span><a href="${x.url}" target="_blank" rel="noopener">Открыть →</a>`;
+        list.appendChild(row);
+      });
+    }
+    renderExchanges();
 
-    byId("btnAfisha").href       = TG.AFISHA;
+    function openModal(){ modal.classList.add("show"); modal.setAttribute("aria-hidden","false"); }
+    function closeModal(){ modal.classList.remove("show"); modal.setAttribute("aria-hidden","true"); }
 
-    byId("btnChatSearch").href   = TG.CHAT_SEARCH;
-    byId("btnChatGeneral").href  = TG.CHAT_GENERAL;
+    openBtn.addEventListener("click", openModal);
+    closeBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
 
-    byId("btnServiceHouse").href = TG.SVC_HOUSE;
-    byId("btnSupport").href      = TG.SVC_SUPPORT;
-
-    byId("btnContact").href      = TG.CONTACT;
-
-    // Тема (light/dark) с сохранением в localStorage
+    // Тема (light/dark) с сохранением
     const themeKey = "thhub_theme";
     const toggle = document.getElementById("themeToggle");
     (function initTheme(){
