@@ -6,23 +6,20 @@
   <title>Thailand Hub — Polar Property Asia</title>
   <meta name="description" content="Все нужные боты и чаты в одном месте: поиск жилья и добавление объявлений для агентов." />
 
-  <!-- Шрифты -->
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#f5f6f8;            /* светлый фон */
-      --ink:#0f172a;           /* основной текст */
-      --muted:#64748b;         /* вторичный текст */
-      --primary:#1f4e79;       /* глубокий синий (бренд) */
-      --accent:#2a7ade;        /* акцентный синий (кнопки) */
-      --sand:#efe7dc;          /* песочный */
-      --card:#ffffff;          /* карточки */
+      --bg:#f5f6f8;
+      --ink:#0f172a;
+      --muted:#64748b;
+      --primary:#1f4e79;
+      --accent:#2a7ade;
+      --card:#ffffff;
       --radius:18px;
       --shadow:0 6px 18px rgba(15,23,42,.08);
     }
-
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
@@ -34,18 +31,14 @@
         linear-gradient(180deg, #fafbff 0%, #f5f6f8 100%);
       background-color:var(--bg);
     }
-
     .wrap{
       max-width:880px;
       margin:0 auto;
       padding:28px 18px 56px;
     }
-
-    /* Шапка */
     .hero{
       border-radius:calc(var(--radius) + 6px);
-      background:
-        linear-gradient(135deg, #1f4e79 0%, #224c9a 50%, #2a7ade 100%);
+      background:linear-gradient(135deg, #1f4e79 0%, #224c9a 50%, #2a7ade 100%);
       color:#fff;
       padding:34px 22px;
       box-shadow:var(--shadow);
@@ -53,30 +46,29 @@
       position:relative;
       isolation:isolate;
     }
-    .hero::after{
-      content:"";
-      position:absolute; inset:auto -60px -60px auto;
-      width:200px; height:200px; border-radius:50%;
-      background:linear-gradient(135deg, #ffffff40, #ffffff10);
-      filter:blur(10px); opacity:.6;
-    }
     .brand{
       display:flex; align-items:center; gap:12px;
       font-weight:700; letter-spacing:.2px;
       font-size:28px;
     }
     .brand-badge{
-      width:40px; height:40px; border-radius:12px;
-      background:linear-gradient(135deg,#ffdca8,#fff);
-      color:#1f4e79; display:grid; place-items:center;
-      font-weight:800; box-shadow:0 4px 12px rgba(0,0,0,.12);
+      padding:8px 14px;
+      border-radius:12px;
+      background:#fff;
+      color:#1f4e79;
+      font-weight:700;
+      font-size:18px;
+      box-shadow:0 4px 12px rgba(0,0,0,.12);
+    }
+    .brand-badge span{
+      font-size:20px;
+      display:block;
+      line-height:1;
     }
     .subtitle{
       margin:10px 0 0;
       color:#e9efff; line-height:1.5;
     }
-
-    /* Карточки-секции */
     .section{
       background:var(--card);
       border-radius:var(--radius);
@@ -91,78 +83,49 @@
       display:flex; align-items:center; gap:10px;
     }
     .section .hint{ color:var(--muted); margin-bottom:6px; }
-
-    /* Кнопки */
     .btn{
-      -webkit-tap-highlight-color:transparent;
       appearance:none; border:0; text-decoration:none;
       display:block; width:100%;
       margin:10px 0; cursor:pointer;
       padding:18px 20px;
       border-radius:14px; text-align:center;
-      font-weight:700; font-size:18px; letter-spacing:.2px;
+      font-weight:700; font-size:18px;
       color:#fff; background:var(--accent);
       box-shadow:0 10px 18px rgba(42,122,222,.22);
-      transform:translateY(0); transition:.18s ease;
+      transition:.18s ease;
     }
     .btn:hover{ transform:translateY(-2px); box-shadow:0 14px 22px rgba(42,122,222,.28) }
-    .btn:active{ transform:translateY(0) scale(.99) }
-
-    .btn--ghost{
-      background:transparent; color:var(--primary);
-      border:2px solid #d9e6ff;
-      box-shadow:none;
-    }
-    .btn--ghost:hover{ background:#f0f6ff }
-
-    .row{ display:grid; gap:12px }
-    @media (min-width:700px){
-      .row{ grid-template-columns:1fr 1fr }
-    }
-
-    /* Футер */
     .footer{
       text-align:center; color:var(--muted);
       margin-top:30px; font-size:14px;
     }
     .footer a{ color:var(--primary); text-decoration:none }
     .footer a:hover{ text-decoration:underline }
-
-    /* Небольшая «оживлялка» */
-    .pop{ animation:pop .5s ease .05s both }
-    .fade{ animation:fade .6s ease .1s both }
-    @keyframes pop{ from{transform:translateY(6px); opacity:0} to{transform:none; opacity:1}}
-    @keyframes fade{ from{opacity:0} to{opacity:1}}
   </style>
 </head>
 <body>
   <div class="wrap">
-    <!-- Hero -->
-    <header class="hero pop">
+    <header class="hero">
       <div class="brand">
-        <div class="brand-badge">PA</div>
+        <div class="brand-badge"><span>🌴</span></div>
         Thailand Hub
       </div>
       <p class="subtitle">Все нужные боты и чаты в одном месте. Быстро, удобно, красиво.</p>
     </header>
 
-    <!-- Поиск жилья -->
-    <section class="section fade">
+    <section class="section">
       <h2>🏡 Поиск жилья</h2>
       <p class="hint">Перейдите в нашего бота, чтобы найти квартиру, дом или апартаменты.</p>
-      <a class="btn" href="https://t.me/RentalPattaya_bot" target="_blank" rel="noopener">Бот для поиска жилья</a>
-      <!-- Если позже понадобится чат — можно оставить «прозрачную» кнопку -->
-      <!-- <a class="btn btn--ghost" href="#" target="_blank" rel="noopener">Чат «Ищу жильё»</a> -->
+      <a class="btn" href="https://t.me/RentalPattaya_bot" target="_blank" rel="noopener">Поиск жилья</a>
     </section>
 
-    <!-- Для агентов -->
-    <section class="section fade">
-      <h2>✍️ Добавить жильё (для агентов)</h2>
+    <section class="section">
+      <h2>✍️ Добавить жильё</h2>
       <p class="hint">Публикация объектов, управление объявлениями и быстрый контакт.</p>
-      <a class="btn" href="https://t.me/AGENTS_Pattayarent_bot" target="_blank" rel="noopener">Бот для агентов</a>
+      <a class="btn" href="https://t.me/AGENTS_Pattayarent_bot" target="_blank" rel="noopener">Добавить жильё</a>
     </section>
 
-    <footer class="footer fade">
+    <footer class="footer">
       © Polar Property Asia · <a href="https://t.me/RentalPattaya_bot" target="_blank" rel="noopener">Связаться</a>
     </footer>
   </div>
