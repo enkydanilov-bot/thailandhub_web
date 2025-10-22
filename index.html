@@ -5,10 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thailand Hub</title>
   <style>
+    /* 🌅 Основные стили */
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f3f5f8;
+      background: linear-gradient(to bottom, #eaf6ff, #f8fbff);
       color: #222;
       text-align: center;
       animation: fadeIn 1s ease-out;
@@ -22,10 +23,13 @@
       border-radius: 0 0 24px 24px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
       animation: floatDown 1.2s ease-out;
+      position: relative;
+      overflow: hidden;
     }
 
-    /* 🌴 Логотип */
+    /* 🌴 Логотип с эффектом волн */
     .brand-badge {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -48,6 +52,19 @@
       line-height: 1;
       transform: translateY(1px);
       transition: transform 0.5s ease;
+    }
+
+    .brand-badge::after {
+      content: "";
+      position: absolute;
+      bottom: -6px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, #76b4ff, #c0e6ff, #76b4ff);
+      background-size: 200% 100%;
+      animation: wave 3s infinite linear;
+      border-radius: 12px;
     }
 
     .brand-badge:hover {
@@ -80,8 +97,13 @@
       max-width: 600px;
       box-shadow: 0 6px 16px rgba(0,0,0,0.08);
       text-align: left;
-      animation: riseUp 1.4s ease-out;
+      opacity: 0;
+      animation: riseUp 1.4s ease-out forwards;
     }
+
+    .card:nth-of-type(1) { animation-delay: 0.2s; }
+    .card:nth-of-type(2) { animation-delay: 0.4s; }
+    .card:nth-of-type(3) { animation-delay: 0.6s; }
 
     .card h2 {
       margin: 0 0 8px 0;
@@ -98,6 +120,7 @@
       margin-bottom: 20px;
     }
 
+    /* 🔹 Кнопки */
     .button {
       display: block;
       background: #3b6fe0;
@@ -108,7 +131,8 @@
       border-radius: 12px;
       font-weight: 600;
       transition: all 0.3s ease;
-      animation: riseUp 1.6s ease-out;
+      opacity: 0;
+      animation: slideUp 1s ease-out forwards;
     }
 
     .button:hover {
@@ -122,7 +146,7 @@
       margin-top: 30px;
       font-size: 14px;
       color: #666;
-      animation: fadeIn 1.8s ease-out;
+      animation: fadeIn 2s ease-out;
     }
 
     footer a {
@@ -136,18 +160,14 @@
 
     /* 🌊 Анимации */
     @keyframes floatIn {
-      0% {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.95);
-      }
-      70% {
-        opacity: 1;
-        transform: translateY(4px) scale(1.02);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      0% { opacity: 0; transform: translateY(-20px) scale(0.95); }
+      70% { opacity: 1; transform: translateY(4px) scale(1.02); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes wave {
+      from { background-position: 0 0; }
+      to { background-position: 200% 0; }
     }
 
     @keyframes fadeIn {
@@ -160,9 +180,22 @@
       100% { opacity: 1; transform: translateY(0); }
     }
 
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     @keyframes floatDown {
       0% { opacity: 0; transform: translateY(-30px); }
       100% { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 📱 Адаптация под телефон */
+    @media (max-width: 600px) {
+      header { padding: 20px; }
+      .card { margin: 16px; padding: 18px; }
+      h2 { font-size: 18px; }
+      .button { font-size: 15px; padding: 12px; }
     }
   </style>
 </head>
@@ -177,18 +210,18 @@
 
   <div class="card">
     <h2>🏡 Поиск жилья</h2>
-    <p>Перейдите в нашего бота, чтобы найти квартиру, дом или апартаменты.</p>
-    <a href="#" class="button">Поиск жилья</a>
+    <p>Перейдите в бота, чтобы найти квартиру, дом или апартаменты в Паттайе и на Пхукете.</p>
+    <a href="https://t.me/RentalPattaya_bot" class="button">Поиск жилья</a>
   </div>
 
   <div class="card">
     <h2>✍️ Добавить жильё</h2>
-    <p>Публикация объектов, управление объявлениями и быстрый контакт.</p>
-    <a href="#" class="button">Добавить жильё</a>
+    <p>Для агентов и собственников — публикуйте свои объекты и управляйте объявлениями.</p>
+    <a href="https://t.me/AGENTS_Pattayarent_bot" class="button">Добавить жильё</a>
   </div>
 
   <footer>
-    © Polar Property Asia · <a href="#">Связаться</a>
+    © Polar Property Asia 🌴 · <a href="#">Связаться</a>
   </footer>
 </body>
 </html>
