@@ -60,7 +60,7 @@
       font-size:18px;
       box-shadow:0 4px 12px rgba(0,0,0,.12);
     }
-    .brand-badge {
+  .brand-badge {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,6 +71,11 @@
   font-weight: 700;
   font-size: 18px;
   box-shadow: 0 4px 12px rgba(0,0,0,.12);
+  transition: transform 0.4s ease;
+}
+
+.brand-badge:hover {
+  transform: rotate(8deg) scale(1.05);
 }
 
 .brand-badge span {
@@ -78,6 +83,12 @@
   display: block;
   line-height: 1;
   transform: translateY(1px);
+  transition: transform 0.4s ease;
+}
+
+.brand-badge:hover span {
+  transform: translateY(1px) rotate(-8deg);
+}
 }
     .subtitle{
       margin:10px 0 0;
