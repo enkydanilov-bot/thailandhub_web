@@ -1,88 +1,250 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thailand Hub</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Thailand Hub — жильё и боты</title>
+  <meta name="description" content="Все нужные боты и чаты в одном месте: поиск жилья и размещение объявлений для агентов. Паттайя / Пхукет." />
+
+  <!-- Open Graph / preview -->
+  <meta property="og:title" content="Thailand Hub — жильё и боты" />
+  <meta property="og:description" content="Поиск жилья и добавление объявлений в один клик. Telegram WebApp-friendly." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/2a7ade/ffffff&text=Thailand+Hub" />
+
+  <!-- Favicon-эмодзи (пальма) -->
+  <link rel="icon" href="data:image/svg+xml,
+    %3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E
+      %3Ctext y='.9em' font-size='80'%3E%F0%9F%8C%B4%3C/text%3E
+    %3C/svg%3E" />
+
   <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      background: #f5f7fa;
-      margin: 0;
-      padding: 0;
+    :root{
+      --bg:#f5f7fb;
+      --card:#ffffff;
+      --text:#1f2a44;
+      --muted:#6b7a90;
+      --brand:#2a7ade;
+      --brand-2:#3c63d6;
+      --ring:rgba(42,122,222,.25);
+      --ok:#10b981;
+      --shadow:0 8px 28px rgba(17,24,39,.08), 0 2px 8px rgba(17,24,39,.04);
+      --radius:16px;
     }
-    header {
-      background: linear-gradient(135deg, #4169e1, #4a8df8);
-      color: white;
-      text-align: center;
-      padding: 30px 20px;
-      border-radius: 0 0 20px 20px;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-system, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Noto Sans", Arial, "Apple Color Emoji","Segoe UI Emoji";
+      color:var(--text);
+      background:var(--bg);
+      line-height:1.45;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
     }
-    header h1 {
-      font-size: 28px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+    a{color:inherit;text-decoration:none}
+    .wrap{max-width:980px;margin:0 auto;padding:20px}
+    .hero{
+      background:linear-gradient(135deg, #2a7ade, #3a89e8 60%, #5689ff);
+      border-radius:24px;
+      padding:28px 24px;
+      color:#fff;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
     }
-    .section {
-      background: white;
-      margin: 20px auto;
-      padding: 20px;
-      border-radius: 15px;
-      max-width: 600px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    .logo-row{display:flex;gap:14px;align-items:center;margin-bottom:10px}
+    .badge{
+      width:44px;height:44px;border-radius:12px;background:#fff1;
+      display:grid;place-items:center;
+      border:1px solid #ffffff2d;
+      box-shadow:inset 0 0 0 1px #ffffff22;
+      font-size:24px;
     }
-    h2 {
-      font-size: 22px;
-      margin-bottom: 8px;
+    .title{font-size:26px;font-weight:800;letter-spacing:.2px}
+    .subtitle{opacity:.95;margin-top:6px}
+    .grid{display:grid;gap:18px;margin-top:20px}
+    @media(min-width:860px){.grid{grid-template-columns:1fr 1fr}}
+
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:18px;
+      transition:transform .2s ease, box-shadow .2s ease;
     }
-    p {
-      color: #555;
-      margin-bottom: 16px;
+    .card:hover{transform:translateY(-2px);box-shadow:0 14px 36px rgba(17,24,39,.10),0 4px 12px rgba(17,24,39,.06)}
+    .card h3{margin:8px 0 6px;font-size:22px}
+    .card .desc{color:var(--muted);font-size:15px;margin-bottom:14px}
+
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;
+      width:100%;gap:10px;
+      background:var(--brand);
+      color:#fff;border:none;border-radius:12px;
+      height:54px;font-weight:700;font-size:18px;
+      cursor:pointer;
+      box-shadow:0 6px 16px var(--ring);
+      transition:transform .06s ease, filter .15s ease, background .15s ease;
     }
-    a.btn {
-      display: block;
-      text-align: center;
-      background: #3b73db;
-      color: white;
-      padding: 14px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: background 0.2s;
+    .btn:hover{filter:brightness(1.05)}
+    .btn:active{transform:translateY(1px)}
+    .btn.secondary{background:#0ea5e9}
+    .btn .i{font-size:20px;line-height:0}
+
+    /* секции ниже */
+    section{margin-top:20px}
+    .section-title{display:flex;align-items:center;gap:10px;margin:0 0 12px}
+    .section-title span{font-size:22px;font-weight:800}
+    .list{display:grid;gap:12px}
+    .link-card{
+      display:flex;align-items:center;justify-content:space-between;
+      background:var(--card);
+      border-radius:12px;padding:14px 16px;box-shadow:var(--shadow);
+      transition:transform .15s ease, box-shadow .2s ease;
     }
-    a.btn:hover {
-      background: #285dc4;
-    }
-    footer {
-      text-align: center;
-      color: #666;
-      font-size: 14px;
-      margin: 40px 0;
-    }
+    .link-card:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(17,24,39,.09),0 4px 10px rgba(17,24,39,.06)}
+    .link-card .l{display:flex;align-items:center;gap:10px}
+    .chip{font-size:12px;background:#ecf2ff;color:#2a55d6;border-radius:999px;padding:4px 8px;font-weight:700}
+    .muted{color:var(--muted)}
+    .ok{color:var(--ok);font-weight:700}
+    footer{opacity:.75;text-align:center;margin:28px 0 16px;font-size:14px}
+    .foot-links a{color:var(--brand);font-weight:700}
+    /* плавные появления */
+    .reveal{opacity:0;transform:translateY(8px);animation:reveal .5s .05s forwards}
+    @keyframes reveal{to{opacity:1;transform:none}}
   </style>
 </head>
 <body>
-  <header>
-    <h1>🌴 Thailand Hub</h1>
-    <p>Все нужные боты и чаты в одном месте. Быстро, удобно, красиво.</p>
-  </header>
+  <div class="wrap">
 
-  <div class="section">
-    <h2>🏡 Поиск жилья</h2>
-    <p>Перейдите в нашего бота, чтобы найти квартиру, дом или апартаменты.</p>
-    <a class="btn" href="https://t.me/RentalPattaya_bot" target="_blank">Поиск жилья</a>
+    <!-- HERO -->
+    <header class="hero reveal">
+      <div class="logo-row">
+        <div class="badge" aria-hidden="true">🌴</div>
+        <div>
+          <div class="title">Thailand Hub</div>
+          <div class="subtitle">Все нужные боты и чаты в одном месте. Быстро, удобно, красиво.</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ДВЕ ГЛАВНЫЕ КАРТОЧКИ -->
+    <main class="grid">
+      <!-- Поиск жилья -->
+      <div class="card reveal" style="animation-delay:.06s">
+        <h3>🏡 Поиск жилья</h3>
+        <p class="desc">Перейдите в нашего бота, чтобы найти квартиру, дом или апартаменты.</p>
+        <a class="btn" href="https://t.me/RentalPattaya_bot" target="_blank" rel="noopener">
+          <span class="i">🔎</span> <span>Поиск жилья</span>
+        </a>
+      </div>
+
+      <!-- Добавить жильё -->
+      <div class="card reveal" style="animation-delay:.12s">
+        <h3>✍️ Добавить жильё</h3>
+        <p class="desc">Публикация объектов, управление объявлениями и быстрый контакт.</p>
+        <a class="btn secondary" href="https://t.me/AGENTS_Pattayarent_bot" target="_blank" rel="noopener">
+          <span class="i">⚡</span> <span>Добавить жильё</span>
+        </a>
+      </div>
+    </main>
+
+    <!-- Чаты / инфо -->
+    <section class="reveal" style="animation-delay:.18s">
+      <div class="section-title"><span>💬 Чаты и полезное</span></div>
+      <div class="list">
+        <!-- Можешь менять/дополнять ссылки ниже при желании -->
+        <a class="link-card" href="https://t.me/RentalPattaya_bot" target="_blank" rel="noopener">
+          <div class="l">
+            <span style="font-size:20px">🤖</span>
+            <div>
+              <div><b>Поддержка в Telegram</b></div>
+              <div class="muted">Задайте вопрос — ответим быстро</div>
+            </div>
+          </div>
+          <div class="chip">@RentalPattaya_bot</div>
+        </a>
+
+        <!-- Пример дополнительного пунктa — оставил как шаблон;
+             если появится реальный чат — просто поменяй href и подписи. -->
+        <!--
+        <a class="link-card" href="https://t.me/your_chat_link" target="_blank" rel="noopener">
+          <div class="l">
+            <span style="font-size:20px">👥</span>
+            <div>
+              <div><b>Чат жильцов Паттайи</b></div>
+              <div class="muted">Отзывы, вопросы, советы</div>
+            </div>
+          </div>
+          <div class="chip">чат</div>
+        </a>
+        -->
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="reveal" style="animation-delay:.24s">
+      <div class="section-title"><span>❓ Коротко о главном</span></div>
+      <div class="list">
+        <div class="link-card" style="cursor:default">
+          <div class="l">
+            <span style="font-size:20px">🗓️</span>
+            <div>
+              <div><b>Быстрый старт</b></div>
+              <div class="muted">Поиск — через кнопку «Поиск жилья». Размещение — «Добавить жильё».</div>
+            </div>
+          </div>
+          <div class="ok">Готово</div>
+        </div>
+
+        <div class="link-card" style="cursor:default">
+          <div class="l">
+            <span style="font-size:20px">🔐</span>
+            <div>
+              <div><b>Безопасность</b></div>
+              <div class="muted">Все переходы идут в Telegram, без лишних форм и логинов на сайте.</div>
+            </div>
+          </div>
+          <div class="chip">Telegram</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="reveal" style="animation-delay:.3s">
+      <div>© Polar Property Asia</div>
+      <div class="foot-links" style="margin-top:6px">
+        <a href="https://t.me/RentalPattaya_bot" target="_blank" rel="noopener">Связаться</a>
+      </div>
+    </footer>
   </div>
 
-  <div class="section">
-    <h2>✍️ Добавить жильё</h2>
-    <p>Публикация объектов, управление объявлениями и быстрый контакт.</p>
-    <a class="btn" href="https://t.me/AddPattaya_bot" target="_blank">Добавить жильё</a>
-  </div>
+  <script>
+    // Если открыто как Telegram WebApp — разворачиваем окно.
+    (function(){
+      if (window.Telegram && Telegram.WebApp) {
+        try { Telegram.WebApp.expand(); } catch(e){}
+      }
+    })();
 
-  <footer>
-    © Polar Property Asia · <a href="https://t.me/PolarPropertyAsia" target="_blank">Связаться</a>
-  </footer>
+    // Лёгкая подсветка клика по кнопкам (волна)
+    document.querySelectorAll('.btn').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        const wave=document.createElement('span');
+        const r = Math.max(btn.clientWidth, btn.clientHeight);
+        wave.style.cssText = `
+          position:absolute;pointer-events:none;inset:0;margin:auto;border-radius:999px;
+          width:${r}px;height:${r}px;background:rgba(255,255,255,.35);transform:scale(0);
+          transition:transform .35s ease, opacity .45s ease;opacity:.9;mix-blend:overlay;
+        `;
+        btn.style.position='relative';
+        btn.appendChild(wave);
+        requestAnimationFrame(()=>{ wave.style.transform='scale(1)'; wave.style.opacity='0'; });
+        setTimeout(()=>wave.remove(), 480);
+      }, {passive:true});
+    });
+
+    // Плавное появление блоков уже сделано через CSS (@keyframes reveal)
+  </script>
 </body>
 </html>
