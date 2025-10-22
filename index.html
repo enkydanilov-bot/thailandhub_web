@@ -51,16 +51,7 @@
       font-weight:700; letter-spacing:.2px;
       font-size:28px;
     }
-    .brand-badge{
-      padding:8px 14px;
-      border-radius:12px;
-      background:#fff;
-      color:#1f4e79;
-      font-weight:700;
-      font-size:18px;
-      box-shadow:0 4px 12px rgba(0,0,0,.12);
-    }
-  .brand-badge {
+    .brand-badge {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,11 +62,7 @@
   font-weight: 700;
   font-size: 18px;
   box-shadow: 0 4px 12px rgba(0,0,0,.12);
-  transition: transform 0.4s ease;
-}
-
-.brand-badge:hover {
-  transform: rotate(8deg) scale(1.05);
+  transition: all 0.4s ease;
 }
 
 .brand-badge span {
@@ -86,8 +73,14 @@
   transition: transform 0.4s ease;
 }
 
+/* 🌴 Эффект при наведении */
+.brand-badge:hover {
+  transform: rotate(6deg) scale(1.08);
+  box-shadow: 0 0 20px rgba(58,142,230,0.45), 0 0 40px rgba(42,122,222,0.25);
+}
+
 .brand-badge:hover span {
-  transform: translateY(1px) rotate(-8deg);
+  transform: translateY(1px) rotate(-6deg);
 }
 }
     .subtitle{
